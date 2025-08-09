@@ -14,4 +14,5 @@ while n < 10:
     print(f"getImage = {client.get_image()}")
     imgg = client.get_image()
     cv2.imshow("imgg", imgg)
+
     time.sleep(0.5)
