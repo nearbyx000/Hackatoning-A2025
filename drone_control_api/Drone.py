@@ -466,7 +466,7 @@ class Drone:
     
     
     async def __get_image_coro(self):
-        if not self.__ws_image or self.__ws_image.closed:
+        if not self.__ws_image : # or self.__ws_image.closed
             return None
         
         await self.__ws_image.send(json.dumps({"method": "get_image"}))

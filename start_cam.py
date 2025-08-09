@@ -11,7 +11,7 @@ print(client.connect(ip, reset_state=True))
 n = 0
 while n < 10:
     print(client.get_nav_pose())
-    print(f"getImage = {client.getImage()}")
-    imgg = client.getImage()
+    print(f"getImage = {client.get_image()}")
+    imgg = client.get_image()
     cv2.imshow("imgg", imgg)
     time.sleep(0.5)
