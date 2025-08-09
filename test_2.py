@@ -15,19 +15,20 @@ path = np.array([
 ]) 
 
 client = Drone()
-print(client.connect("10.42.0.1", reset_state=True))
+print(client.connect("192.168.41.21", reset_state=True))
 print(client.takeoff())
-time.sleep(5.0)
+client.set_height(0.5)
 
-for i, point_idx in enumerate(order_path):
+for point_idx in order_path:
     y, x = path[point_idx]
-    movement_completed = False
 
-    def cb(msg):
-        global movement_completed
-        movement_completed = True
-    # Старт движения
-    client.go_to_xy_nav_nb(x, y, callback=cb)
+    # movement_completed = False
+
+    # def cb(msg):
+    #     global movement_completed
+    #     movement_completed = True
+    # # Старт движения
+    client.go_to_xy_nav(x, y)
 
 print(client.landing())
 print(client.disconnect())
