@@ -20,7 +20,7 @@ print(client.takeoff())
 time.sleep(5.0)
 
 for i, point_idx in enumerate(order_path):
-    x, y = path[point_idx]
+    y, x = path[point_idx]
     movement_completed = False
 
     def cb(msg):
@@ -31,4 +31,5 @@ for i, point_idx in enumerate(order_path):
 
 print(client.landing())
 print(client.disconnect())
+
 
