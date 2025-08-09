@@ -1,19 +1,11 @@
-from time import sleep
+from drone_control_api import Drone
 
-drone = Drone()
-drone.connect("192.168.0.100")
+ip = "10.42.0.1"
 
-# Асинхронно запускаем взлёт
-drone.takeoff_nb(callback=lambda resp: print("Взлёт завершён:", resp))
+client = Drone()
 
-# Пока дрон взлетает — делаем что-то ещё
-for i in range(5):
-    drone.set_diod(1, 0, 0)  # красный
-    sleep(0.5)
-    drone.set_diod(0, 1, 0)  # зелёный
-    sleep(0.5)
+print(client.connect(ip, reset_state=True))
 
-# Ждём завершения взлёта, если нужно, через feedback
-print("Статус взлёта:", drone.takeoff_feedback())
-
-drone.disconnect()
+n = 0
+while n < 10:
+    print(client.get_nav_pose())
