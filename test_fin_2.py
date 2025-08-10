@@ -65,7 +65,7 @@ order_path = np.array([
 ]) 
 
 path = np.array([
-    [0.0, 0.0], [0.0, 4.0], [0.0, 1.25], [2.0, 1.25],
+    [0.0, 0.0], [0.0, 3.0], [0.0, 1.25], [2.0, 1.25],
     [2.0, 0.8], [3.0, 0.8], [2.5, 3.5], [4.0, 3.5],
     [5.0, 3.5], [5.0, 1.0], [5.0, 3.0], [2.5, 3.0], [2.5, 1.75], [0.0, 1.75], 
 ])
@@ -86,7 +86,7 @@ print(client.takeoff())
 client.set_height(0.5)
 
 for i, point_idx in enumerate(order_path):
-    x, y = path[point_idx]
+    y, x = path[point_idx]
     
     movement_event = {"completed": False}
     
