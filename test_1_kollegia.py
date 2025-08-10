@@ -143,8 +143,5 @@ for i, point_idx in enumerate(order_path):
 print(client.landing())
 print(client.disconnect())
 
-with open("people.json", "w") as f:
-    json.dump(people, f, indent=2)
-with open("fire.json", "w") as f:
-    json.dump(fire, f, indent=2)
+
 
