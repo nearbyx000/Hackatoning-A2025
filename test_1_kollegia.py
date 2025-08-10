@@ -4,7 +4,7 @@ import time
 import math
 import json
 
-z = 0.7                
+z = 0.5                
 ang_h = math.radians(60)    
 ang_v = math.radians(45)    
 width, hight = 640, 480     
@@ -54,9 +54,9 @@ def process_detections(client, current_yaw, people, fire):
     return detected_px_x
 
 order_path = np.array([
-    1, 2, 3, 4, 5, 6, 7, 8, 8, 9, 10,
-    11, 12, 1
-]) - 1
+    0, 1, 2, 3, 4, 5, 6, 7, 7, 8, 9,
+    10, 11, 12, 13, 0
+]) 
 
 order_yaw = np.array([
     1, 4, 3, 4, 3, 5, 3, 1, 3, 4, 1,
@@ -65,7 +65,7 @@ order_yaw = np.array([
 path = np.array([
     [0.0, 0.0], [0.0, 6.0], [0.0, 1.25], [2.0, 1.25],
     [2.0, 0.5], [0.5, 3.0], [2.5, 3.5], [4.0, 3.5],
-    [6.0, 3.5], [6.0, 0.0], [6.0, 1.75], [0.0, 1.75]
+    [5.0, 3.5], [5.0, 1.0], [5.0, 3.0], [2.5, 3.0], [2.5, 1.75], [0.0, 1.75], 
 ])
 
 yaw_angles = np.array([ math.radians(0), math.radians(90), math.radians(-90), math.radians(180), math.radians(45),])
