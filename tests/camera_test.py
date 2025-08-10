@@ -18,3 +18,8 @@ while (n != 10):
     cv2.imshow("imgg", imgg)
     n+=1
 print(client.disconnect())
+
+
+
+
+
