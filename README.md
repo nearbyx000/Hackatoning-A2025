@@ -1,4 +1,4 @@
-# **Решение для "Аэрокосмического хакатона 2025"**
+# **Автономные дроны, миссия Архипелаг-2025"**
 
 ![Python](https://img.shields.io/badge/python-3.9%2B-blue.svg)
 ![OpenCV](https://img.shields.io/badge/OpenCV-4.5-green.svg)
