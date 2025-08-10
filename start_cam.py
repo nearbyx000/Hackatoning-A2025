@@ -2,7 +2,7 @@ from drone_control_api import Drone
 import time
 import cv2
 
-ip = "10.42.0.1"
+ip = "192.168.41.21"
 
 client = Drone()
 
@@ -14,5 +14,6 @@ while n < 10:
     print(f"getImage = {client.get_image()}")
     imgg = client.get_image()
     cv2.imshow("imgg", imgg)
+    cv2.waitKey(1)
 
-    time.sleep(0.5)
+    time.sleep(0.033)
