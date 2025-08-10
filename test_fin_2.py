@@ -65,7 +65,7 @@ order_path = np.array([
 ]) 
 
 path = np.array([
-    [0.0, 0.0], [0.0, 2.0], [0.0, 1.25], [2.0, 1.25],
+    [0.0, 0.0], [0.0, 3.0], [0.0, 1.25], [2.0, 1.25],
     [3.0, 0.8], [2.5, 3.5], [4.0, 3.5], [5.0, 3.5],
     [5.0, 1.0], [5.0, 3.0], [2.5, 3.0], [2.5, 1.75], [0.0, 1.75], 
 ])
@@ -97,6 +97,7 @@ for i, point_idx in enumerate(order_path):
 
     while not movement_event["completed"]:
         data = client.get_detections()
+        print(client.get_nav_pose())
         if data and "boxes" in data:
             process_detections(client, people, fire)
         time.sleep(0.05)
