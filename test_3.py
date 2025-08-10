@@ -23,7 +23,7 @@ path = np.array([
 ]) 
 
 client = Drone()
-print(client.connect("10.42.0.1", reset_state=True))
+print(client.connect("192.168.41.21", reset_state=True))
 print(client.takeoff())
 time.sleep(5.0)
 
