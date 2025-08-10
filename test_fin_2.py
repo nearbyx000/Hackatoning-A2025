@@ -8,7 +8,7 @@ import os
 z = 0.5                
 ang_h = math.radians(60)    
 ang_v = math.radians(45)    
-width, hight = 640, 480     
+width, height = 640, 480   
 
 def save_people():
     with open("people.json", "w") as f:
@@ -18,21 +18,21 @@ def save_fire():
     with open("fire.json", "w") as f:
         json.dump(fire, f, indent=2)
 
-def is_new_object(obj_list, x, y, threshold=0.4):
+def is_new_object(obj_list, x, y, threshold=1.0):
     for obj in obj_list:
         if math.hypot(obj["x"] - x, obj["y"] - y) <= threshold:
             return False
     return True
 
-def pixel_to_global(px_x, px_y, x_d, y_d, yaw_d=0.0):
+def pixel_to_global(px_x, px_y, x_d, y_d):
     delta_x_angle = (px_x - width/2) / width * ang_h
-    delta_y_angle = (px_y - hight/2) / hight * ang_v
+    delta_y_angle = (px_y - height/2) / height * ang_v 
 
     distance_forward = z / math.tan(math.pi/2 - delta_y_angle)
     lateral_offset = math.tan(delta_x_angle) * distance_forward
 
-    x_obj = x_d + distance_forward * math.cos(yaw_d) - lateral_offset * math.sin(yaw_d)
-    y_obj = y_d + distance_forward * math.sin(yaw_d) + lateral_offset * math.cos(yaw_d)
+    x_obj = x_d + distance_forward
+    y_obj = y_d + lateral_offset
     
     return x_obj, y_obj
 
@@ -47,7 +47,7 @@ def process_detections(client, people, fire):
             px_x = bbox["center"]["x"]
             px_y = bbox["center"]["y"]
 
-            x_obj, y_obj = pixel_to_global(px_x, px_y, x_d, y_d, 0.0)
+            x_obj, y_obj = pixel_to_global(px_x, px_y, x_d, y_d)
 
             if label == "human" and is_new_object(people, x_obj, y_obj):
                 people.append({"x": x_obj, "y": y_obj})
@@ -65,8 +65,8 @@ order_path = np.array([
 ]) 
 
 path = np.array([
-    [0.0, 0.0], [0.0, 6.0], [0.0, 1.25], [2.0, 1.25],
-    [2.0, 0.5], [0.5, 3.0], [2.5, 3.5], [4.0, 3.5],
+    [0.0, 0.0], [0.0, 4.0], [0.0, 1.25], [2.0, 1.25],
+    [2.0, 0.8], [3.0, 0.8], [2.5, 3.5], [4.0, 3.5],
     [5.0, 3.5], [5.0, 1.0], [5.0, 3.0], [2.5, 3.0], [2.5, 1.75], [0.0, 1.75], 
 ])
 
