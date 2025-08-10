@@ -5,21 +5,20 @@ import math
 import json
 
 order_path = np.array([
-    1, 2, 3, 4, 5, 6, 7, 8, 8, 9, 10,
-    11, 12, 1
+    0, 1, 2, 3, 4, 5, 6, 7, 8, 8, 9,
+    10, 11, 12, 13, 0
 ]) - 1
 
 order_yaw = np.array([
     1, 4, 3, 4, 3, 5, 3, 1, 3, 4, 1,
-    1, 1, 1
 ]) - 1
 
 yaw_angles = np.array([0, math.radians(90), math.radians(-90), math.radians(180), math.radians(45),])
 
 path = np.array([
-    [0.0, 0.0], [0.0, 6.0], [0.0, 1.25], [2.0, 1.25],
-    [2.0, 0.5], [0.5, 3.0], [2.5, 3.5], [4.0, 3.5],
-    [6.0, 3.5], [6.0, 0.0], [6.0, 1.75], [0.0, 1.75]
+    [0.0, 0.0], [0.0, 5.0], [0.0, 1.25], [2.0, 1.25],
+    [2.0, 0.8], [3.0, 0.8], [2.5, 3.5], [4.0, 3.5],
+    [5.0, 3.5], [5.0, 1.0], [5.0, 3.0], [2.5, 3.0], [2.5, 1.75], [0.0, 1.75], 
 ]) 
 
 client = Drone()
@@ -35,16 +34,21 @@ for i, point_idx in enumerate(order_path):
         global movement_completed
         movement_completed = True
     # Старт движения
-    client.go_to_xy_nav_nb(x, y, callback=cb)
-
-    rotation_completed = False
-    def rotation_callback(msg):
-        global rotation_completed
-        rotation_completed = True
     
-    yaw_idx = order_yaw[i]
-    yaw_angle = yaw_angles[yaw_idx]
-    client.set_yaw_nb(yaw_angle, callback=rotation_callback)
+    client.go_to_xy_nav_nb(x, y, callback=cb)
+    
+    if i < len(order_yaw):
+        yaw_idx = order_yaw[i]
+        yaw_angle = yaw_angles[yaw_idx]
+
+        rotation_completed = False
+        def rotation_callback(msg):
+            global rotation_completed
+            rotation_completed = True
+
+        client.set_yaw_nb(yaw_angle, callback=rotation_callback)
+        while not rotation_completed:
+            time.sleep(0.05)
 
 print(client.landing())
 print(client.disconnect())
