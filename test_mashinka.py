@@ -1,8 +1,8 @@
 import json
 import time
-from nav_api_ws import NavBot
+from robot_api.rf_bot_api import NavBot
 
-ROBOT_HOST = "192.168.0.10"
+ROBOT_HOST = "127.0.0.1"
 ROBOT_PORT = 8765
 
 def load_target_from_json(file_path: str):
@@ -21,7 +21,7 @@ def dispatch_robot(json_file: str):
         
         # Ожидание готовности с проверкой ошибок
         ready_status = bot.wait_until_ready(timeout=15.0)
-        if ready_status == -1:3
+        if ready_status == -1:
             raise RuntimeError("Ошибка инициализации робота")
         elif ready_status == 0:
             raise TimeoutError("Робот не ответил в течение 15 секунд")
